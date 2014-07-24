@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.lang.social.R;
-import com.lang.social.competition.CompetitionConstants;
+import com.lang.social.competition.SocialGameConstants;
 import com.lang.social.controllers.ServerController;
 import com.lang.social.iocallback.IOCallBackHandler;
 import com.lang.social.logic.GameType;
@@ -184,7 +183,7 @@ ActionBar.TabListener, StudentTeacherServerListener {
 	    	else {
 	    		intent.putExtra(StudentTeacherConstants.IsTeacherHost, StudentTeacherConstants.TeacherHost);
 	    	}
-	    	intent.putExtra(CompetitionConstants.IntentPlayer1Key, UserController.getUser());
+	    	intent.putExtra(SocialGameConstants.IntentPlayer1Key, UserController.getUser());
 			startActivity(intent);
 		}
 		else 

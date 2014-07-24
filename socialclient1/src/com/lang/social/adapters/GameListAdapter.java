@@ -13,17 +13,17 @@ import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
 import com.lang.social.R;
-import com.lang.social.competition.CompetitionGameItem;
+import com.lang.social.competition.SocialGameListItem;
 import com.lang.social.logic.User;
 
 
-public class GameListAdapter extends ArrayAdapter<CompetitionGameItem> {
+public class GameListAdapter extends ArrayAdapter<SocialGameListItem> {
 	
 	private Context context;
 	private int layoutResourceId;
-	private ArrayList<CompetitionGameItem> gamesList;
+	private ArrayList<SocialGameListItem> gamesList;
 	
-	public GameListAdapter(Context context, int layoutResourceId, ArrayList<CompetitionGameItem> gamesList){
+	public GameListAdapter(Context context, int layoutResourceId, ArrayList<SocialGameListItem> gamesList){
 		super(context, R.layout.game_list_row, gamesList);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -31,7 +31,7 @@ public class GameListAdapter extends ArrayAdapter<CompetitionGameItem> {
 	}
 
 	@Override
-	public CompetitionGameItem getItem(int position) {
+	public SocialGameListItem getItem(int position) {
 		return gamesList.get(position);
 	}
 
@@ -55,7 +55,7 @@ public class GameListAdapter extends ArrayAdapter<CompetitionGameItem> {
 			itemView = inflater.inflate(layoutResourceId, parent, false);
 		}
 		
-		CompetitionGameItem gameItem = gamesList.get(position);
+		SocialGameListItem gameItem = gamesList.get(position);
 		User player1 = gameItem.getPlayer1();
 		
 

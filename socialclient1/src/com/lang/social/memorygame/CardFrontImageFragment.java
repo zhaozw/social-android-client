@@ -27,7 +27,7 @@ public class CardFrontImageFragment extends Fragment implements OnClickListener 
         ivCard.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.image_1));
         
         Bundle bundle = getArguments(); 
-        //fragment recylces the same view... need anothero option
+
 		i = bundle.getInt("i");
 		j = bundle.getInt("j");
                 

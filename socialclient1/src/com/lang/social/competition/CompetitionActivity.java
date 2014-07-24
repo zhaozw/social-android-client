@@ -90,11 +90,11 @@ public class CompetitionActivity extends Activity
 		
 		getViews();
 		
-		mUserState = getIntent().getStringExtra(CompetitionConstants.IntentRoomStateKEY);
+		mUserState = getIntent().getStringExtra(SocialGameConstants.IntentRoomStateKEY);
 		
-		User user1 = (User)getIntent().getSerializableExtra(CompetitionConstants.IntentPlayer1Key);
+		User user1 = (User)getIntent().getSerializableExtra(SocialGameConstants.IntentPlayer1Key);
 		mPlayer1 = new CompetitionPlayer(user1);
-		User user2 = (User)getIntent().getSerializableExtra(CompetitionConstants.IntentPlayer2Key);
+		User user2 = (User)getIntent().getSerializableExtra(SocialGameConstants.IntentPlayer2Key);
 		mPlayer2 = new CompetitionPlayer(user2);
 		
 		if(mPlayer1.getUser().isFacebookUser()){
@@ -380,7 +380,7 @@ public class CompetitionActivity extends Activity
 	
 	@Override
 	public void onPlayerLeftGameEvent(JSONObject jsonResponse) {
-		if(mUserState.equals(CompetitionConstants.IntentRoomStateVALUEJoined)) {
+		if(mUserState.equals(SocialGameConstants.IntentRoomStateVALUEJoined)) {
 			MyToaster.showToast(CompetitionActivity.this, "The game was closed by the host!", Toast.LENGTH_SHORT);
 		} else {
 			MyToaster.showToast(CompetitionActivity.this, mPlayer2.getUser().getFullName() + " has left the game!", Toast.LENGTH_SHORT);

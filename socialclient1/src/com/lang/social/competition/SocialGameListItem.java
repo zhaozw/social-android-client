@@ -9,12 +9,12 @@ import com.lang.social.logic.User;
 
 
 @SuppressWarnings("serial")
-public class CompetitionGameItem implements Serializable {
+public class SocialGameListItem implements Serializable {
 	
 	private User mPlayer1;
 	private int mRoomID;
 	
-	public CompetitionGameItem(JSONObject userJson, int roomID) {
+	public SocialGameListItem(JSONObject userJson, int roomID) {
 		mPlayer1 = new User(userJson);
 		this.mRoomID = roomID;
 	}

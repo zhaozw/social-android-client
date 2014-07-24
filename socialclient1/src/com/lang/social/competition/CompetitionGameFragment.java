@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.lang.social.R;
 import com.lang.social.competition.CompetitionGame.PlayerNumber;
 import com.lang.social.controllers.ServerController;
-import com.lang.social.interfaces.GameCloseListener;
 import com.lang.social.iocallback.IOCallBackHandler;
 import com.lang.social.parsers.ServerResponseParser;
 import com.lang.social.utils.JSONUtils;
@@ -84,13 +83,13 @@ public class CompetitionGameFragment extends Fragment implements HeadToHeadListe
 	}
 	
 	private void askForNextRoundFromServer() {
-		ServerController.sendJSONMessage(CompetitionConstants.QuestionAndAnswersRequest, new JSONObject());
+		ServerController.sendJSONMessage(SocialGameConstants.QuestionAndAnswersRequest, new JSONObject());
 	}
 	
 	private void notifyServerAboutActionMade(int buttonIndexPressed){
 		JSONObject json = new JSONObject();
 		JSONUtils.setStringValue(json, "answer", mChoiceButtons[buttonIndexPressed].getText().toString());
-		ServerController.sendJSONMessage(CompetitionConstants.playerActionNotify, json);
+		ServerController.sendJSONMessage(SocialGameConstants.playerActionNotify, json);
 	}
 	
 	private void handleUserChoice(int buttonIndexPressed){
@@ -167,11 +166,11 @@ public class CompetitionGameFragment extends Fragment implements HeadToHeadListe
 	@Override
 	public void onQuestionAndAnswersRecieved(JSONObject json){
 		Log.d("Comp", json.toString());
-		List<String> jsonKeys = Arrays.asList(CompetitionConstants.RoundKey);
+		List<String> jsonKeys = Arrays.asList(SocialGameConstants.RoundKey);
 		ServerResponseParser srp = new ServerResponseParser(json, jsonKeys);
 		srp.checkLegalResponseJSON();
 		if(srp.isOkResult()) {
-			JSONObject roundJson = JSONUtils.getJSONObject(json, CompetitionConstants.RoundKey);
+			JSONObject roundJson = JSONUtils.getJSONObject(json, SocialGameConstants.RoundKey);
 			if(mGameRound == null) {
 				mGameRound = new Round(roundJson);
 				setAnswersAndQuestionInView();
@@ -327,7 +326,7 @@ public class CompetitionGameFragment extends Fragment implements HeadToHeadListe
 		mChoiceButtons[3] = (Button) view.findViewById(R.id.btnCompetition3);
 		
 		if((((CompetitionActivity) getActivity()).getUserState())
-				.equals(CompetitionConstants.IntentRoomStateVALUEJoined)){
+				.equals(SocialGameConstants.IntentRoomStateVALUEJoined)){
 			mChoiceButtons[0].setEnabled(false);
 			mChoiceButtons[1].setEnabled(false);
 			mChoiceButtons[2].setEnabled(false);

@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.lang.social.R;
-import com.lang.social.competition.CompetitionConstants;
+import com.lang.social.competition.SocialGameConstants;
 import com.lang.social.controllers.ServerController;
 import com.lang.social.iocallback.IOCallBackHandler;
 import com.lang.social.logic.GameType;
@@ -131,12 +131,12 @@ private PullToRefreshListView pullToRefreshView;
 		Log.d("StudentTabFragment", "in OnStudentJoinGameResponse");
 		if(JSONUtils.getStringFromJSON(jsonResponse, "result", null).equals("OK"))
 		{
-			User playerTeacher = new User(JSONUtils.getJSONObject(jsonResponse, CompetitionConstants.IntentPlayer1Key));
+			User playerTeacher = new User(JSONUtils.getJSONObject(jsonResponse, SocialGameConstants.IntentPlayer1Key));
 	    	Intent intent = new Intent(getActivity(), RoomActivity.class);
 	    	intent.putExtra(StudentTeacherConstants.IntentRoomStateKEY, "Joined");	
-	    	intent.putExtra(CompetitionConstants.IntentPlayer1Key, playerTeacher);	
+	    	intent.putExtra(SocialGameConstants.IntentPlayer1Key, playerTeacher);	
 	    	intent.putExtra(RoomConstants.GameTypeKEY, (GameType.TeacherGame));	
-	    	intent.putExtra(CompetitionConstants.IntentPlayer2Key, UserController.getUser());	
+	    	intent.putExtra(SocialGameConstants.IntentPlayer2Key, UserController.getUser());	
 	    	intent.putExtra(StudentTeacherConstants.IsTeacherHost, StudentTeacherConstants.TeacherHost);
 	    	startActivity(intent);
 		}

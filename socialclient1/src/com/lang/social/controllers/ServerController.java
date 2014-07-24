@@ -9,6 +9,8 @@ import javax.net.ssl.SSLContext;
 
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
@@ -18,7 +20,7 @@ public class ServerController  {
 
 	 private static final String TAG = "SOCKET"; 
 	 
-	 public static final String LOCAL_SERVER_URL = "http://10.0.0.9:8000";
+	 public static final String LOCAL_SERVER_URL = "http://10.0.0.6:8000";
 	 
 	 private static final String NODEJITSU_SERVER_URL = "http://lang.social.com.jit.su/";
 	 private static final String HEROKU_SERVER_URL = "http://ancient-taiga-2396.herokuapp.com/";
@@ -33,10 +35,11 @@ public class ServerController  {
 		 }
 
 		socket = new SocketIO();
-		socket.connect(NODEJITSU_SERVER_URL, IOCallBackHandler.getInstance()); 
+		socket.connect(LOCAL_SERVER_URL, IOCallBackHandler.getInstance()); 
 	 }
 	 
-	 public static boolean wasConnectionEstablished(){
+
+	public static boolean wasConnectionEstablished(){
 		 return socket.isConnected();
 	 }
 	 

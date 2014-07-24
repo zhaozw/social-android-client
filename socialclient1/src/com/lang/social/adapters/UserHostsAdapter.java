@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,16 @@ import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
 import com.lang.social.R;
-import com.lang.social.competition.CompetitionGameItem;
+import com.lang.social.competition.SocialGameListItem;
 import com.lang.social.logic.User;
 
-public class UserHostsAdapter extends ArrayAdapter<CompetitionGameItem> {
+public class UserHostsAdapter extends ArrayAdapter<SocialGameListItem> {
 	
 	private Context context;
 	private int layoutResourceId;
-	private ArrayList<CompetitionGameItem> competitionGameItems;
+	private ArrayList<SocialGameListItem> competitionGameItems;
 	
-	public UserHostsAdapter(Context context, int layoutResourceId, ArrayList<CompetitionGameItem> competitionGameItems){
+	public UserHostsAdapter(Context context, int layoutResourceId, ArrayList<SocialGameListItem> competitionGameItems){
 		super(context, R.layout.game_list_row, competitionGameItems);
         this.layoutResourceId = layoutResourceId;
         this.competitionGameItems = competitionGameItems;
@@ -40,7 +41,7 @@ public class UserHostsAdapter extends ArrayAdapter<CompetitionGameItem> {
 			itemView = inflater.inflate(layoutResourceId, parent, false);
 		}
 		
-		CompetitionGameItem host = competitionGameItems.get(position);
+		SocialGameListItem host = competitionGameItems.get(position);
 		User player1 = host.getPlayer1();
 		
 		if(player1.isFacebookUser()) {
@@ -57,7 +58,13 @@ public class UserHostsAdapter extends ArrayAdapter<CompetitionGameItem> {
 		TextView tvPlayerLevel = (TextView) itemView.findViewById(R.id.tvListItemLevel);
 		tvPlayerLevel.setText(player1.getCurrentLanguageLevel());
 		
-		
+		Typeface tf = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-LightItalic.ttf");
+		Typeface tf1 = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-ThinItalic.ttf");
+		Typeface tf2 = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Light.ttf");
+		Typeface tf3 = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Regular.ttf");
+		Typeface tf4 = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Thin.ttf");
+		TextView tvJoin = (TextView) itemView.findViewById(R.id.tvJoin);
+		tvJoin.setTypeface(tf);
 		
 		ImageView tvFlag = (ImageView) itemView.findViewById(R.id.ivFlag);
 		tvFlag.setImageResource(player1.getFlagImageRes());

@@ -27,6 +27,7 @@ import com.lang.social.interfaces.UserLanguageUpdateListener;
 import com.lang.social.interfaces.UserLoginListener;
 import com.lang.social.interfaces.UserProfileListener;
 import com.lang.social.interfaces.UserRegisterListener;
+import com.lang.social.memorygame.MemoryGameListener;
 import com.lang.social.picturequizgame.PictureQuizGameListener;
 import com.lang.social.profile.FriendDetailsResponseListener;
 import com.lang.social.quizgame.QuizActivityListener;
@@ -49,7 +50,7 @@ public class IOCallBackHandler implements IOCallback {
 	private static ActivitiesIOCallBackHandler activitiesIOCallBackHandler;
 	private static GameIOCallBackHandler gameIOCallBackHandler;
 	private static QuizIOCallBackHandler quizGameIOCallBackHandler;
-	private static CompetitionIOCallBackHandler competitionIOCallBackHandler;
+	private static SocialIOCallBackHandler socialIOCallBackHandler;
 	private static ChatIOCallBackHandler chatIOCallBackHandler;
 	private static CommunityIOCallBackHandler communityIOCallBackHandler;
 	private static StudentTeacherIOCallBackHandler studentTeacherIOCallBackHandler;
@@ -98,11 +99,11 @@ public class IOCallBackHandler implements IOCallback {
 	}
 	
 	public void setSocialLearnJoinMenuListener(SocialLearnJoinMenuListener socialLearnJoinMenuListener){
-		competitionIOCallBackHandler.setSocialLearnMenuJoinListener(socialLearnJoinMenuListener);
+		socialIOCallBackHandler.setSocialLearnMenuJoinListener(socialLearnJoinMenuListener);
 	}
 	
 	public void setSocialLearnCreateMenuListener(SocialLearnCreateMenuListener socialLearnCreateMenuListener){
-		competitionIOCallBackHandler.setSocialLearnMenuCreateListener(socialLearnCreateMenuListener);
+		socialIOCallBackHandler.setSocialLearnMenuCreateListener(socialLearnCreateMenuListener);
 	}
 	
 	public void setQuizActivityListener(QuizActivityListener quizActivityListener){
@@ -118,7 +119,11 @@ public class IOCallBackHandler implements IOCallback {
 	}
 	
 	public void setHeadToHeadListener(HeadToHeadListener headToHeadListener) {
-		competitionIOCallBackHandler.setHeadToHeadListener(headToHeadListener);
+		socialIOCallBackHandler.setHeadToHeadListener(headToHeadListener);
+	}
+	
+	public void setMemoryGameListener(MemoryGameListener memoryGameListener) {
+		socialIOCallBackHandler.setMemoryGameListener(memoryGameListener);
 	}
 	
 	public void setFriendsListener(FriendsServerListener i_firendsServerListener){
@@ -176,7 +181,7 @@ public class IOCallBackHandler implements IOCallback {
 			userIOCallBackHandler = new UserIOCallBackHandler();
 			gameIOCallBackHandler = new GameIOCallBackHandler();
 			quizGameIOCallBackHandler = new QuizIOCallBackHandler();
-			competitionIOCallBackHandler = new CompetitionIOCallBackHandler();
+			socialIOCallBackHandler = new SocialIOCallBackHandler();
 			activitiesIOCallBackHandler = new ActivitiesIOCallBackHandler();
 			chatIOCallBackHandler = new ChatIOCallBackHandler();
 			communityIOCallBackHandler = new CommunityIOCallBackHandler();
@@ -198,7 +203,7 @@ public class IOCallBackHandler implements IOCallback {
 		gameIOCallBackHandler.handleResponse(eventName, jsonResponse);
 		quizGameIOCallBackHandler.handleResponse(eventName, jsonResponse);
 		activitiesIOCallBackHandler.handleResponse(eventName, jsonResponse);
-		competitionIOCallBackHandler.handleResponse(eventName, jsonResponse);
+		socialIOCallBackHandler.handleResponse(eventName, jsonResponse);
 		chatIOCallBackHandler.handleResponse(eventName, jsonResponse);
 		communityIOCallBackHandler.handleResponse(eventName, jsonResponse);
 		studentTeacherIOCallBackHandler.handleResponse(eventName, jsonResponse);

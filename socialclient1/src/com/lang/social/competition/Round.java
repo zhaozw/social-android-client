@@ -11,9 +11,9 @@ public class Round {
 	private String mCorrectAnswer;
 	
 	public Round(JSONObject roundJson) {
-		mQuestion = JSONUtils.getStringFromJSON(roundJson, CompetitionConstants.QuestionKey, "could not get question");
-		mAnswers = JSONUtils.getStringArrayFromJSON(roundJson, CompetitionConstants.AnswersKey, "could not get answers");
-		mCorrectAnswer = JSONUtils.getStringFromJSON(roundJson, CompetitionConstants.AnswersIndexKey, "could not get corrent answer index");
+		mQuestion = JSONUtils.getStringFromJSON(roundJson, SocialGameConstants.QuestionKey, "could not get question");
+		mAnswers = JSONUtils.getStringArrayFromJSON(roundJson, SocialGameConstants.AnswersKey, "could not get answers");
+		mCorrectAnswer = JSONUtils.getStringFromJSON(roundJson, SocialGameConstants.AnswersIndexKey, "could not get corrent answer index");
 	}
 
 	public String getmQuestion() {

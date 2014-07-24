@@ -11,8 +11,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -55,16 +58,34 @@ public class LoginActivity extends FragmentActivity implements UserLoginListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		try {
+			initSociaLang();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+/*		
+		try {
+			if(isWifiEnabled()) {
+				initSociaLang();
+			} else {
+				MyToaster.showToast(this, "Turn on Wifi connection!", Toast.LENGTH_SHORT);
+			}
+		} catch(MalformedURLException e){
+			Log.e(TAG, "Failed to connect to server - Server URL Not OK!");
+		}*/
+	}
 
+	private void initSociaLang() throws MalformedURLException {
+		ServerController.connectToServer();
 		setAsLoginListener();
-		connectToServer();
 		createProgressDialog();
         setTextFonts();
         setButtonListeners();
         initFacebookFragment();
-
 	}
-
 
 	private void initFacebookFragment(){
         facebookFragment = new FacebookFragment();
@@ -75,14 +96,13 @@ public class LoginActivity extends FragmentActivity implements UserLoginListener
 		IOCallBackHandler.getInstance().setLoginListener(this);
 	}
 
-	private void connectToServer() {	
-		try {
-			ServerController.connectToServer();
-		} catch(MalformedURLException e){
-			Log.e(TAG, "Failed to connect to server - Server URL Not OK!");
-		}
+	 private boolean isWifiEnabled() {
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		return activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
 	}
 
+	 
 	public void initIntentAndMoveToHomeActivity(JSONObject json) {
 		Intent homeIntent = new Intent(this, HomeActivity.class);
 		JSONObject userJson = JSONUtils.getJSONObject(json, UserKEY);

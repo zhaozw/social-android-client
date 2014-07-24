@@ -21,9 +21,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.lang.social.R;
 import com.lang.social.adapters.UserHostsAdapter;
-import com.lang.social.competition.CompetitionConstants;
-import com.lang.social.competition.CompetitionErrorHandler;
-import com.lang.social.competition.CompetitionGameItem;
+import com.lang.social.competition.SocialGameListItem;
+import com.lang.social.competition.SocialGameConstants;
 import com.lang.social.competition.SocialLearnCreateMenuListener;
 import com.lang.social.competition.SocialLearnJoinMenuListener;
 import com.lang.social.controllers.ServerController;
@@ -35,7 +34,6 @@ import com.lang.social.logic.UserController;
 import com.lang.social.parsers.ServerResponseParser;
 import com.lang.social.room.RoomActivity;
 import com.lang.social.room.RoomConstants;
-import com.lang.social.teachstudy.StudentTeacherConstants;
 import com.lang.social.usermanager.UserSessionManager;
 import com.lang.social.utils.JSONUtils;
 
@@ -49,12 +47,11 @@ public class GamesListActivity extends Activity
 	private static final String TAG = "Competition";
 	private static final String roomIDKey = "GameRoomID";
 	//----------------------------------------------------------------------------------------------------------
-	private ArrayList<CompetitionGameItem> mCompetitionGameItems = new ArrayList<CompetitionGameItem>();
+	private ArrayList<SocialGameListItem> mGameItems = new ArrayList<SocialGameListItem>();
 	private PullToRefreshListView pullToRefreshView;
 	private UserHostsAdapter AdapterHostGames;
 	private ProgressDialog mProgressDialog;
 	private GameType mGameType = GameType.HeadToHeadQuizGame;
-	private CompetitionErrorHandler mCompetitionErrorHandler = new CompetitionErrorHandler(); 
 	//----------------------------------------------------------------------------------------------------------
 
     @Override
@@ -65,16 +62,25 @@ public class GamesListActivity extends Activity
         createProgressDialog();
         setListViewListeners();
        
+        String gameType = getIntent().getStringExtra(SocialLearnMenuActivity.GameTypeKey);
+        
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setTitle("Competition");
-        
-    	String jsonStrUserHosts = getIntent().getStringExtra(CompetitionConstants.jsonUserHostsKEY);
+        if(gameType.equals(GameType.HeadToHeadQuizGame.toString())){
+    	   getActionBar().setTitle("Head To Head");
+    	   mGameType = GameType.HeadToHeadQuizGame;
+    	   getActionBar().setIcon(getResources().getDrawable(R.drawable.timericon3));
+        } else  if(gameType.equals(GameType.MemoryGame.toString())) {
+    		getActionBar().setTitle("Memory Game");
+    		mGameType = GameType.MemoryGame;
+    		getActionBar().setIcon(getResources().getDrawable(R.drawable.memorygameicon3));
+        }
+
+    	String jsonStrUserHosts = getIntent().getStringExtra(SocialGameConstants.jsonUserHostsKEY);
     	JSONObject jsonHosts = JSONUtils.newJSONObject(jsonStrUserHosts);
-		JSONArray jsonUserHosts = JSONUtils.getJSONArray(jsonHosts, CompetitionConstants.jsonUserHostsKEY);
-		mCompetitionGameItems = JSONUtils.ParseJsonHostsUsers(jsonUserHosts);
-		AdapterHostGames = new UserHostsAdapter(this, R.layout.game_list_row, mCompetitionGameItems);
-		
+		JSONArray jsonUserHosts = JSONUtils.getJSONArray(jsonHosts, SocialGameConstants.jsonUserHostsKEY);
+		mGameItems = JSONUtils.ParseJsonHostsUsers(jsonUserHosts);
+		AdapterHostGames = new UserHostsAdapter(this, R.layout.game_list_row, mGameItems);
 		pullToRefreshView.setAdapter(AdapterHostGames);
     }
 
@@ -111,21 +117,20 @@ public class GamesListActivity extends Activity
 	@Override
 	public void onGameListRecieved(JSONObject JSONHostGames) {
 		Log.d(TAG, JSONHostGames.toString());
-		
-		List<String> jsonKeys = Arrays.asList(new String[]{CompetitionConstants.jsonUserHostsKEY});
+		List<String> jsonKeys = Arrays.asList(new String[]{SocialGameConstants.jsonUserHostsKEY});
 		ServerResponseParser srp = new ServerResponseParser(JSONHostGames, jsonKeys);
 		srp.checkLegalResponseJSON();
 		if(srp.isOkResult())
 		{
-			JSONArray jsonUserHosts = JSONUtils.getJSONArray(JSONHostGames, CompetitionConstants.jsonUserHostsKEY);
-			mCompetitionGameItems = JSONUtils.ParseJsonHostsUsers(jsonUserHosts);
+			JSONArray jsonUserHosts = JSONUtils.getJSONArray(JSONHostGames, SocialGameConstants.jsonUserHostsKEY);
+			mGameItems = JSONUtils.ParseJsonHostsUsers(jsonUserHosts);
 		}
 
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				AdapterHostGames.clear();
-				AdapterHostGames.addAll(mCompetitionGameItems);
+				AdapterHostGames.addAll(mGameItems);
 				AdapterHostGames.notifyDataSetChanged();
 				pullToRefreshView.onRefreshComplete();
 			}
@@ -136,7 +141,7 @@ public class GamesListActivity extends Activity
 	//REQUESTS
 	//--------------------------------------------------------------------------
 	private void requestJoinGame(int which) {
-		CompetitionGameItem gameItem = mCompetitionGameItems.get(which);
+		SocialGameListItem gameItem = mGameItems.get(which);
 		JSONObject jsonToSend = JSONUtils.CreateJSON(roomIDKey, gameItem.getRoomID());
 		
 		IOCallBackHandler.getInstance().setSocialLearnCreateMenuListener(null);
@@ -146,14 +151,14 @@ public class GamesListActivity extends Activity
 		ServerController.sendJSONMessage(RoomConstants.joinGameRequest, jsonToSend);
 	}
 
-	private void requestOpenNewCompetitionGameFromServer() {
-		Log.d(TAG, "Sending startNewCompetitionGame Request");
+	private void requestOpenNewGameFromServer() {
+		Log.d(TAG, "Sending startNewGame Request");
 		
 		IOCallBackHandler.getInstance().setSocialLearnJoinMenuListener(null);
 		IOCallBackHandler.getInstance().setSocialLearnCreateMenuListener(this);
 		
 		JSONObject json = new JSONObject();
-		JSONUtils.setStringValue(json, "GameType", mGameType.toString());
+		JSONUtils.setStringValue(json, SocialLearnMenuActivity.GameTypeKey, mGameType.toString());
 		ServerController.sendJSONMessage(RoomConstants.startGameRequest, json);
 		mProgressDialog.show();
 	}
@@ -162,27 +167,27 @@ public class GamesListActivity extends Activity
 	//RESPONSES
 	//---------------------------------------------------------------------------
 	@Override
-	public void OnCompetitionJoinGameResponse(JSONObject jsonResponse) { 
+	public void OnJoinGameResponse(JSONObject jsonResponse) { 
 		Log.d(TAG, jsonResponse.toString());
 		List<String> jsonKeys = null;
 		ServerResponseParser srp = new ServerResponseParser(jsonResponse, jsonKeys);
 		srp.checkLegalResponseJSON();
 		if(srp.isOkResult())
 		{
-			User playerHost = new User(JSONUtils.getJSONObject(jsonResponse, CompetitionConstants.IntentPlayer1Key));
+			User playerHost = new User(JSONUtils.getJSONObject(jsonResponse, SocialGameConstants.IntentPlayer1Key));
 	    	Intent intent = new Intent(this, RoomActivity.class);
-	    	intent.putExtra(CompetitionConstants.IntentRoomStateKEY, "Joined");
-	    	intent.putExtra(CompetitionConstants.IntentPlayer1Key, playerHost);
+	    	intent.putExtra(SocialGameConstants.IntentRoomStateKEY, "Joined");
+	    	intent.putExtra(SocialGameConstants.IntentPlayer1Key, playerHost);
 	    	intent.putExtra(RoomConstants.GameTypeKEY, mGameType);
-	    	intent.putExtra(CompetitionConstants.IntentPlayer2Key, UserController.getUser());
+	    	intent.putExtra(SocialGameConstants.IntentPlayer2Key, UserController.getUser());
 	    	startActivity(intent);
 		}
 	}
 	
 
 	@Override
-	public void OnCompetitionGameStartResponse(JSONObject jsonResponse) {
-		Log.d(TAG, "in OnCompetitionGameStartResponse");
+	public void OnGameStartResponse(JSONObject jsonResponse) {
+		Log.d(TAG, "in OnGameStartResponse");
 		mProgressDialog.dismiss();
 		List<String> jsonKeys = null;
 		ServerResponseParser srp = new ServerResponseParser(jsonResponse, jsonKeys);
@@ -190,15 +195,11 @@ public class GamesListActivity extends Activity
 		if(srp.isOkResult())
 		{
 	    	Intent intent = new Intent(this, RoomActivity.class);
-	    	intent.putExtra(CompetitionConstants.IntentRoomStateKEY, "Created");
+	    	intent.putExtra(SocialGameConstants.IntentRoomStateKEY, "Created");
 	    	intent.putExtra(RoomConstants.GameTypeKEY, mGameType);
 	    	User currUser = UserController.getUser();
-	    	intent.putExtra(CompetitionConstants.IntentPlayer1Key, currUser);
+	    	intent.putExtra(SocialGameConstants.IntentPlayer1Key, currUser);
 	    	startActivity(intent);
-		}
-		else 
-		{
-			mCompetitionErrorHandler.OnFailedToCreateNewGame();
 		}
 	}
 	//---------------------------------------------------------------------------
@@ -218,7 +219,7 @@ public class GamesListActivity extends Activity
 	    		finish();
 	    		return true;
 	        case R.id.action_new_game:
-	        	requestOpenNewCompetitionGameFromServer();
+	        	requestOpenNewGameFromServer();
 	            return true;
 	        case R.id.action_logout:
 	        	new UserSessionManager(this).logOutUser();

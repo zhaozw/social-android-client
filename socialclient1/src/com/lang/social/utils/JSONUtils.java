@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.lang.social.competition.CompetitionGameItem;
+import com.lang.social.competition.SocialGameListItem;
 import com.lang.social.items.LanguageItem;
 
 public class JSONUtils {
@@ -34,8 +34,8 @@ public class JSONUtils {
 		return languagesArrayList;
 	}
 	
-    public static ArrayList<CompetitionGameItem> ParseJsonHostsUsers(JSONArray jsonHosts) {	
-    	ArrayList<CompetitionGameItem> hosts = new ArrayList<CompetitionGameItem>();
+    public static ArrayList<SocialGameListItem> ParseJsonHostsUsers(JSONArray jsonHosts) {	
+    	ArrayList<SocialGameListItem> hosts = new ArrayList<SocialGameListItem>();
         try {
         	
 			 for (int i = 0; i < jsonHosts.length(); i++)
@@ -45,7 +45,7 @@ public class JSONUtils {
 			 	JSONObject hostPlayer = HostAndGameNumberJson.getJSONObject(hostKEY);
 			 	int gameRoomNumber = HostAndGameNumberJson.getInt(gameRoomNumberKEY);
 			 	
-				hosts.add(new CompetitionGameItem(hostPlayer, gameRoomNumber));
+				hosts.add(new SocialGameListItem(hostPlayer, gameRoomNumber));
 			 }
 			 
 		} catch (JSONException e) {

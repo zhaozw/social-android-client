@@ -1,6 +1,6 @@
 package com.lang.social.competition;
 
-public class CompetitionConstants {
+public class SocialGameConstants {
 	
 	//SEND
 	//--------------------------------------------------------------------------------------------------------

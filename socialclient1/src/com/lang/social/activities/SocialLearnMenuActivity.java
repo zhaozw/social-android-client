@@ -31,12 +31,14 @@ import com.lang.social.parsers.ServerResponseParser;
 import com.lang.social.room.RoomConstants;
 import com.lang.social.teachstudy.StudentTeacherActivity;
 import com.lang.social.usermanager.UserSessionManager;
+import com.lang.social.utils.JSONUtils;
 
 public class SocialLearnMenuActivity extends Activity implements GamesListListener{
 	
 	public static final String userGameHostsRequest = "userGameHostsRequest";
 	public static final String userGameHostsResponse = "userGameHostsResponse";
 	public static final String jsonUserHosts = "jsonUserHosts";
+	public static final String GameTypeKey = "GameType";
 	
 	private LearnFeatureListAdapter socialLearnListAdapter;
 	private ArrayList<LearnFeatureMenuItem> socialLearnItems;
@@ -52,7 +54,7 @@ public class SocialLearnMenuActivity extends Activity implements GamesListListen
 		socialLearnItems.add(new LearnFeatureMenuItem(R.drawable.timericon3, "Competition", "1 VS 1 Match!"));
 		socialLearnItems.add(new LearnFeatureMenuItem(R.drawable.studentteacher, "Teacher/Student", "Teach/Study With Other Learner!"));
 		socialLearnItems.add(new LearnFeatureMenuItem(R.drawable.teamicon, "Team Power", "Solve Questions Together!"));
-		socialLearnItems.add(new LearnFeatureMenuItem(R.drawable.timericon1, "Memory Game", "Test your memory skills!"));
+		socialLearnItems.add(new LearnFeatureMenuItem(R.drawable.memorygameicon3, "Memory Game", "Test your memory skills!"));
 		createListItems(socialLearnItems);
 		
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,9 +72,8 @@ public class SocialLearnMenuActivity extends Activity implements GamesListListen
         listViewSocialLearn.setAdapter(socialLearnListAdapter);
         listViewSocialLearn.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int which,
-					long arg3) {
-				switch(which){
+			public void onItemClick(AdapterView<?> arg0, View arg1, int which, long arg3) {
+				switch(which) {
 					case 0:
 						mGameType = GameType.HeadToHeadQuizGame;
 						sendGamesListFetchRequestToServer(mGameType);
@@ -86,10 +87,7 @@ public class SocialLearnMenuActivity extends Activity implements GamesListListen
 						break;
 					case 3:
 						mGameType = GameType.MemoryGame;
-						//sendGamesListFetchRequestToServer(mGameType);
-						Intent i = new Intent(SocialLearnMenuActivity.this, MemoryGameActivity.class);
-//						intent.putExtra(jsonUserHosts, jsonHosts.toString());
-						startActivity(i);
+						sendGamesListFetchRequestToServer(mGameType);
 						break;
 				}
 			}
@@ -106,6 +104,7 @@ public class SocialLearnMenuActivity extends Activity implements GamesListListen
 		{
 			Intent intent = new Intent(this, GamesListActivity.class);
 			intent.putExtra(jsonUserHosts, jsonHosts.toString());
+			intent.putExtra(GameTypeKey, mGameType.toString());
 			startActivity(intent);
 		}
 	}
@@ -113,32 +112,9 @@ public class SocialLearnMenuActivity extends Activity implements GamesListListen
 
 	private void sendGamesListFetchRequestToServer(GameType mGameType) {
 		JSONObject jsonToSend = new JSONObject();
-		if(mGameType == GameType.HeadToHeadQuizGame) {
-			try {
-				
-				IOCallBackHandler.getInstance().setGamesListListener(this);
-				jsonToSend.put("GameType", mGameType.toString());
-				ServerController.sendJSONMessage(userGameHostsRequest, jsonToSend);
-
-			} catch (JSONException ex) {
-				new JSONExceptionHandler()
-					.handleException(ex)
-					.setErrorMessage("HOSTS","Error in sendGamesListFetchRequestToServer");
-			}
-		}
-		else if(mGameType == GameType.StudentTeacher) {
-			try {
-				
-				IOCallBackHandler.getInstance().setGamesListListener(this);
-				jsonToSend.put("GameType", mGameType.toString());
-				ServerController.sendJSONMessage(userGameHostsRequest, jsonToSend);
-
-			} catch (JSONException ex) {
-				new JSONExceptionHandler()
-					.handleException(ex)
-					.setErrorMessage("HOSTS","Error in sendGamesListFetchRequestToServer");
-			}
-		}
+		IOCallBackHandler.getInstance().setGamesListListener(this);
+		JSONUtils.setStringValue(jsonToSend, "GameType", mGameType.toString());
+		ServerController.sendJSONMessage(userGameHostsRequest, jsonToSend);
 	}
 	
 	@Override

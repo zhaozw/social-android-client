@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.facebook.widget.ProfilePictureView;
 import com.lang.social.R;
 import com.lang.social.competition.CompetitionActivity;
-import com.lang.social.competition.CompetitionConstants;
+import com.lang.social.competition.SocialGameConstants;
 import com.lang.social.controllers.ServerController;
 import com.lang.social.interfaces.GameCloseListener;
 import com.lang.social.iocallback.IOCallBackHandler;
@@ -71,8 +71,8 @@ public class RoomActivity extends Activity implements RoomListener , GameCloseLi
         getActionBar().setIcon(getResources().getDrawable(R.drawable.roomicon));
 
         mGameType = (GameType) getIntent().getSerializableExtra(RoomConstants.GameTypeKEY);
-		mUserState = getIntent().getStringExtra(CompetitionConstants.IntentRoomStateKEY);
-		mPlayerHost = (User) getIntent().getSerializableExtra(CompetitionConstants.IntentPlayer1Key);
+		mUserState = getIntent().getStringExtra(SocialGameConstants.IntentRoomStateKEY);
+		mPlayerHost = (User) getIntent().getSerializableExtra(SocialGameConstants.IntentPlayer1Key);
 		
 		tvUserHost.setText(mPlayerHost.getFullName());
 		tvUserGuest.setText(Default_Guest_Name);
@@ -82,10 +82,10 @@ public class RoomActivity extends Activity implements RoomListener , GameCloseLi
 			ppvUserHost.setProfileId(mPlayerHost.getProfileID());
 		}
 		
-		if(mUserState.equals(CompetitionConstants.IntentRoomStateVALUEJoined))
+		if(mUserState.equals(SocialGameConstants.IntentRoomStateVALUEJoined))
 		{
 			tvWaiting.setText("Waiting for " + mPlayerHost.getFirstName() + " to launch game...");
-			mPlayerGuest = (User) getIntent().getSerializableExtra(CompetitionConstants.IntentPlayer2Key);
+			mPlayerGuest = (User) getIntent().getSerializableExtra(SocialGameConstants.IntentPlayer2Key);
 			if(mPlayerGuest.isFacebookUser())
 			{
 				ppvUserGuest.setProfileId(mPlayerGuest.getProfileID());
@@ -117,9 +117,9 @@ public class RoomActivity extends Activity implements RoomListener , GameCloseLi
 		    .setMessage("Are you sure you want to exit the room?")
 		    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) { 
-		        	if(mUserState.equals(CompetitionConstants.IntentRoomStateVALUECreated)){
+		        	if(mUserState.equals(SocialGameConstants.IntentRoomStateVALUECreated)){
 		        		closeGameNotification();
-		        	}else {
+		        	} else {
 		        		notifyHostAboutGuestLeave();
 		        	}
 		        	Log.d(TAG, "finishing...");
@@ -153,7 +153,7 @@ public class RoomActivity extends Activity implements RoomListener , GameCloseLi
 	@Override
 	public void onPlayerLeftGameEvent(JSONObject jsonResponse) {
 		Log.d(TAG, "in onGameClosedEvent");
-		if(mUserState.equals(CompetitionConstants.IntentRoomStateVALUEJoined)) {
+		if(mUserState.equals(SocialGameConstants.IntentRoomStateVALUEJoined)) {
 			Log.d(TAG, "host left room");
 			MyToaster.showToast(RoomActivity.this, "Room was closed by host!", Toast.LENGTH_SHORT);
 			finish();
@@ -217,13 +217,13 @@ public class RoomActivity extends Activity implements RoomListener , GameCloseLi
 		{
 			dismissProgressDialog();
 			if(mGameType == GameType.HeadToHeadQuizGame) {
-				User host = new User(JSONUtils.getJSONObject(jsonResponse, CompetitionConstants.IntentPlayer1Key));
-				User guest = new User(JSONUtils.getJSONObject(jsonResponse, CompetitionConstants.IntentPlayer2Key));
+				User host = new User(JSONUtils.getJSONObject(jsonResponse, SocialGameConstants.IntentPlayer1Key));
+				User guest = new User(JSONUtils.getJSONObject(jsonResponse, SocialGameConstants.IntentPlayer2Key));
 				intent = new Intent(RoomActivity.this, CompetitionActivity.class);
-				intent.putExtra(CompetitionConstants.IntentRoomStateKEY, mUserState);
+				intent.putExtra(SocialGameConstants.IntentRoomStateKEY, mUserState);
 				intent.putExtra(RoomConstants.GameTypeKEY, mGameType);
-				intent.putExtra(CompetitionConstants.IntentPlayer1Key, host);
-				intent.putExtra(CompetitionConstants.IntentPlayer2Key, guest);
+				intent.putExtra(SocialGameConstants.IntentPlayer1Key, host);
+				intent.putExtra(SocialGameConstants.IntentPlayer2Key, guest);
 			}
 			else if(mGameType == GameType.StudentGame || mGameType == GameType.TeacherGame) {
 				User Student = new User(JSONUtils.getJSONObject(jsonResponse, StudentTeacherConstants.IntentStudentKey));

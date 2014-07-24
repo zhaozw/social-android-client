@@ -2,34 +2,34 @@ package com.lang.social.iocallback;
 
 import org.json.JSONObject;
 
-import android.util.Log;
-
-import com.lang.social.competition.CompetitionConstants;
 import com.lang.social.competition.HeadToHeadListener;
+import com.lang.social.competition.SocialGameConstants;
 import com.lang.social.competition.SocialLearnCreateMenuListener;
 import com.lang.social.competition.SocialLearnJoinMenuListener;
+import com.lang.social.memorygame.MemoryGameListener;
 import com.lang.social.room.RoomConstants;
 
-public class CompetitionIOCallBackHandler {
+public class SocialIOCallBackHandler {
 
 	private SocialLearnJoinMenuListener socialLearnMenuJoinGameListener;
 	private SocialLearnCreateMenuListener socialLearnMenuCreateGameListener;
 	private HeadToHeadListener mHeadListener;
+	private MemoryGameListener memoryGameListener;
 	
 	public void handleResponse(String eventName, JSONObject jsonResponse) {
 		 if (eventName.equals(RoomConstants.startNewGameResponse)){
 			if(socialLearnMenuCreateGameListener != null){
-				socialLearnMenuCreateGameListener.OnCompetitionGameStartResponse(jsonResponse);
+				socialLearnMenuCreateGameListener.OnGameStartResponse(jsonResponse);
 			}
 		} else if(eventName.equals(RoomConstants.playerJoinedGameResponse)){
 			if(socialLearnMenuJoinGameListener != null){
-				socialLearnMenuJoinGameListener.OnCompetitionJoinGameResponse(jsonResponse);
+				socialLearnMenuJoinGameListener.OnJoinGameResponse(jsonResponse);
 			}
-		} else if(eventName.equals(CompetitionConstants.QuestionAndAnswersResponse)){
+		} else if(eventName.equals(SocialGameConstants.QuestionAndAnswersResponse)){
 			if(mHeadListener != null){
 				mHeadListener.onQuestionAndAnswersRecieved(jsonResponse);
 			}
-		}  else if(eventName.equals(CompetitionConstants.HeadToHeadAnswerResponseKey)){
+		}  else if(eventName.equals(SocialGameConstants.HeadToHeadAnswerResponseKey)){
 			if(mHeadListener != null){
 				mHeadListener.onAnswerResponse(jsonResponse);
 			}
@@ -46,5 +46,9 @@ public class CompetitionIOCallBackHandler {
 	
 	public void setHeadToHeadListener(HeadToHeadListener headToHeadListener) {
 		this.mHeadListener = headToHeadListener;
+	}
+
+	public void setMemoryGameListener(MemoryGameListener memoryGameListener) {
+		this.memoryGameListener = memoryGameListener;
 	}
 }
