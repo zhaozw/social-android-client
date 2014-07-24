@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <!-- ListRow Left side Thumbnail image -->
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+
+        <com.facebook.widget.ProfilePictureView
+            android:id="@+id/ivReciverProfileImage"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/profileimageme" >
+        </com.facebook.widget.ProfilePictureView>
+    </LinearLayout>
+    <!-- Rightend Arrow -->
+    <!-- City -->
+
+    <TextView
+        android:id="@+id/tvReciverName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="40dp"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Aviv Shafir"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:editable="false"
+        android:typeface="sans" />
+    
+    <TextView
+        android:id="@+id/tvToLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="To:"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:editable="false"
+        android:typeface="sans" />
+    
+    <TextView
+        android:id="@+id/tvSubjectLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tvToLabel"
+        android:text="Subject:"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:editable="false"
+        android:typeface="sans" />
+    
+    <EditText
+        android:id="@+id/etSubjectText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvReciverName"
+        android:layout_toRightOf="@+id/tvSubjectLabel"
+        android:textColor="#040404"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:maxHeight="80dp"
+        android:scrollbars="vertical"
+        android:inputType="textMultiLine"
+        android:layout_alignParentRight="true"
+        android:typeface="sans" />
+    
+    <TextView
+        android:id="@+id/tvMessageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/thumbnail"
+        android:text="Message:"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:editable="false"
+        android:typeface="sans" />
+    
+     <EditText
+        android:id="@+id/etContentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@+id/tvMessageLabel"
+        android:layout_below="@+id/thumbnail"
+        android:textColor="#040404"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:maxHeight="160dp"
+        android:scrollbars="vertical"
+        android:inputType="textMultiLine"
+        android:layout_alignParentRight="true"
+        android:typeface="sans" />
+
+     <Button
+        android:id="@+id/btSendMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/etContentText"
+        android:layout_marginLeft="80dp"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Send"
+        android:typeface="sans" />
+     
+      <Button
+        android:id="@+id/btCancelMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/etContentText"
+        android:layout_marginLeft="170dp"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Cancel"
+        android:typeface="sans" />
+
+</RelativeLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lang.social"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.lang.social.activities.LoginActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.HomeActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.RegisterActivity" >
+        </activity>
+        <activity android:name="com.lang.social.profile.ProfileActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.GamesListActivity" >
+        </activity>
+        <activity
+            android:name="com.facebook.LoginActivity"
+            android:value="@string/APP_ID" >
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/APP_ID" />
+
+        <activity
+            android:name="com.lang.social.activities.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.lang.social.activities.CreateNewGameActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.GameLobbyActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.MyLanguagesActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.WaitingGameAcitivity" >
+        </activity>
+        <activity android:name="com.lang.social.room.RoomActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.activities.SelfLearnMenuActivity"
+            android:parentActivityName="com.lang.social.activities.HomeActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.SocialLearnMenuActivity" >
+        </activity>
+        <activity android:name="com.lang.social.competition.CompetitionActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.quizgame.QuizActivity"
+            android:parentActivityName="com.lang.social.activities.SelfLearnMenuActivity" >
+        </activity>
+        <activity android:name="com.lang.social.picgame.PicGameActivity" >
+        </activity>
+        <activity android:name="com.lang.social.activities.RegisterPart2Activity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.activities.UserProfileActivity"
+            android:parentActivityName="com.lang.social.activities.HomeActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.community.general.CommunityActivity"
+            android:parentActivityName="com.lang.social.activities.HomeActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.teachstudy.StudentTeacherActivity"
+            android:label="@string/title_activity_student_teacher"
+            android:parentActivityName="com.lang.social.activities.SocialLearnMenuActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.teachstudy.StudentTeacherRoomActivity"
+            android:parentActivityName="com.lang.social.activities.SocialLearnMenuActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.teachstudy.lesson.StudentTeacherLessonActivity"
+            android:label="@string/title_activity_student_teacher_game_study"
+            android:parentActivityName="com.lang.social.activities.SocialLearnMenuActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.picturequizgame.PictureQuizGameActivity"
+            android:label="@string/title_activity_picture_quiz_game" >
+        </activity>
+        <activity
+            android:name="com.lang.social.photoguess.PhotoGuessActivity"
+            android:label="@string/title_activity_photo_guess" >
+        </activity>
+        <activity
+            android:name="com.lang.social.screenslide.ScreenSlideActivity"
+            android:label="@string/title_activity_screen_slide" >
+        </activity>
+        <activity
+            android:name="com.lang.social.hangman.HangmanActivity"
+            android:parentActivityName="com.lang.social.activities.SelfLearnMenuActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.hangman.HangmanGameActivity"
+            android:parentActivityName="com.lang.social.hangman.HangmanActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.lang.social.profile.ViewProfileActivity"
+            android:parentActivityName="com.lang.social.activities.HomeActivity" >
+        </activity>
+        <activity
+            android:name="com.lang.social.memorygame.MemoryGameActivity"
+            android:label="@string/title_activity_memory_game" >
+        </activity>
+    </application>
+
+</manifest>
