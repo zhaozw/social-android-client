@@ -11,7 +11,8 @@
     android:focusable="true">
  
     <ImageView
-        android:id="@+id/cardImage"
+        android:id="@+id/cardimage"
+        android:contentDescription="front card image"
         android:layout_width="100dp"
         android:layout_height="100dp" >
     </ImageView>

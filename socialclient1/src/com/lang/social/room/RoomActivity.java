@@ -31,6 +31,7 @@ import com.lang.social.interfaces.GameCloseListener;
 import com.lang.social.iocallback.IOCallBackHandler;
 import com.lang.social.logic.GameType;
 import com.lang.social.logic.User;
+import com.lang.social.memorygame.MemoryGameActivity;
 import com.lang.social.parsers.ServerResponseParser;
 import com.lang.social.teachstudy.StudentTeacherConstants;
 import com.lang.social.teachstudy.lesson.StudentTeacherLessonActivity;
@@ -235,16 +236,15 @@ public class RoomActivity extends Activity implements RoomListener , GameCloseLi
 				String isTeacherHost = getIntent().getStringExtra(StudentTeacherConstants.IsTeacherHost);
 				intent.putExtra(StudentTeacherConstants.IsTeacherHost, isTeacherHost);
 			}
-//			else if(mGameType == GameType.TeacherGame) {
-//				User Student = new User(JSONUtils.getJSONObject(jsonResponse, StudentTeacherConstants.IntentStudentKey));
-//				User Teacher = new User(JSONUtils.getJSONObject(jsonResponse, StudentTeacherConstants.IntentTeacherKey));
-//				intent = new Intent(RoomActivity.this, StudentTeacherLessonActivity.class);
-//				intent.putExtra(StudentTeacherConstants.IntentStudentKey, Student);
-//				intent.putExtra(StudentTeacherConstants.IntentTeacherKey, Teacher);
-//				intent.putExtra(StudentTeacherConstants.IntentRoomStateKEY, mUserState);
-//				String isTeacherHost = getIntent().getStringExtra(StudentTeacherConstants.IsTeacherHost);
-//				intent.putExtra(StudentTeacherConstants.IsTeacherHost, isTeacherHost);
-//			}
+			else if(mGameType == GameType.MemoryGame) {
+				User host = new User(JSONUtils.getJSONObject(jsonResponse, SocialGameConstants.IntentPlayer1Key));
+				User guest = new User(JSONUtils.getJSONObject(jsonResponse, SocialGameConstants.IntentPlayer2Key));
+				intent = new Intent(RoomActivity.this, MemoryGameActivity.class);
+				intent.putExtra(SocialGameConstants.IntentRoomStateKEY, mUserState);
+				intent.putExtra(RoomConstants.GameTypeKEY, mGameType);
+				intent.putExtra(SocialGameConstants.IntentPlayer1Key, host);
+				intent.putExtra(SocialGameConstants.IntentPlayer2Key, guest);
+			}
 			startActivity(intent);
 			finish();
 		}

@@ -23,17 +23,18 @@ public class CardFrontImageFragment extends Fragment implements OnClickListener 
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.memory_game_card_front_image_fragment_item_layout, container, false);
         
-        ImageView ivCard = (ImageView) view.findViewById(R.id.cardImage);
+        ImageView ivCard = (ImageView) view.findViewById(R.id.cardimage);
         ivCard.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.image_1));
-        
-        Bundle bundle = getArguments(); 
 
-		i = bundle.getInt("i");
-		j = bundle.getInt("j");
-                
-        ivCard.setOnClickListener(this);        
-        
         return view;
+    }
+    
+    public void SetRow(int row){
+    	this.i = row;
+    }
+    
+    public void SetCol(int col){
+    	this.j = col;
     }
     
  

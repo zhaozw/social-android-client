@@ -16,6 +16,7 @@
 		        android:id="@+id/tableRow1"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_marginRight="10dp"
 		        android:weightSum="4" >
 		 
 				<FrameLayout
@@ -58,6 +59,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="2dp"
+		        android:layout_marginRight="10dp"
 		        android:weightSum="4" >
 		 
 				<FrameLayout
@@ -96,6 +98,7 @@
 
 		    <TableRow
 		        android:id="@+id/tableRow3"
+		        android:layout_marginRight="10dp"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="2dp"
@@ -137,6 +140,7 @@
 
 		    <TableRow
 		        android:id="@+id/tableRow4"
+		        android:layout_marginRight="10dp"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="2dp"
@@ -176,15 +180,17 @@
 		
 	</TableLayout>
 
-	<RelativeLayout android:id="@+id/BottomMemoryGameLayout"
+	<RelativeLayout
+	    android:id="@+id/BottomMemoryGameLayout"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="15dp" >
-
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:background="@drawable/profilepagebg2" >
+	    
 	    <com.facebook.widget.ProfilePictureView
-	        android:id="@+id/ppvCompetitionGuest"
+	        android:id="@+id/ppvProfilePic"
 	        android:layout_width="60dip"
 	        android:layout_height="60dip"
 	        android:layout_alignParentLeft="true"
@@ -193,6 +199,16 @@
 	        android:contentDescription="@string/app_name"
 	        android:src="@drawable/profileimageme" >
 	    </com.facebook.widget.ProfilePictureView>
+
+	    <TextView
+	        android:id="@+id/tvPlayerName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="19dp"
+	        android:layout_toRightOf="@+id/ppvProfilePic"
+	        android:text="John Doe" />
+	    
 	</RelativeLayout>
 	
 </RelativeLayout>
