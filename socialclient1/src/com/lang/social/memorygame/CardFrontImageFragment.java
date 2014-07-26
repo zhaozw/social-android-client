@@ -2,6 +2,7 @@ package com.lang.social.memorygame;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +24,12 @@ public class CardFrontImageFragment extends Fragment implements OnClickListener 
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.memory_game_card_front_image_fragment_item_layout, container, false);
         
+        Bitmap bitmap = (Bitmap) getArguments().getParcelable(MemoryGameActivity.MemoryGameImage);
         ImageView ivCard = (ImageView) view.findViewById(R.id.cardimage);
-        ivCard.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.image_1));
-
+        if(bitmap != null && ivCard != null){
+        	ivCard.setImageBitmap(bitmap);
+        }
+        
         return view;
     }
     

@@ -8,6 +8,7 @@
 	    android:id="@+id/tableLayout1"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" 
+	    android:background="@color/GrayLight"
 	    android:layout_above="@+id/BottomMemoryGameLayout">
 		 
 	    <!-- Row 1 start -->
@@ -22,21 +23,21 @@
 				<FrameLayout
 			   	    android:id="@+id/card00"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card01"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card02"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -44,7 +45,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card03" 
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	
@@ -65,21 +66,21 @@
 				<FrameLayout
 			   	    android:id="@+id/card10"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card11"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card12"
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -87,7 +88,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card13" 
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	
@@ -107,21 +108,21 @@
 				<FrameLayout
 			   	    android:id="@+id/card20"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card21"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card22"
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -129,7 +130,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card23" 
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	
@@ -149,21 +150,21 @@
 				<FrameLayout
 			   	    android:id="@+id/card30"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card31"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card32"
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -171,7 +172,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card33" 
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="80dp"
+			   	    android:layout_height="120dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	
@@ -183,31 +184,45 @@
 	<RelativeLayout
 	    android:id="@+id/BottomMemoryGameLayout"
 	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
+	    android:layout_height="100dp"
 	    android:layout_alignParentBottom="true"
 	    android:layout_alignParentLeft="true"
 	    android:layout_alignParentRight="true"
 	    android:background="@drawable/profilepagebg2" >
-	    
-	    <com.facebook.widget.ProfilePictureView
-	        android:id="@+id/ppvProfilePic"
+
+	    <com.mikhaellopez.circularimageview.CircularImageView
+	        android:id="@+id/ivPlayerPicture"
 	        android:layout_width="60dip"
 	        android:layout_height="60dip"
+	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentTop="true"
-	        android:layout_marginLeft="20dp"
-	        android:contentDescription="@string/app_name"
-	        android:src="@drawable/profileimageme" >
-	    </com.facebook.widget.ProfilePictureView>
+	        android:layout_marginLeft="28dp"
+	        android:src="@drawable/person" />
 
 	    <TextView
 	        android:id="@+id/tvPlayerName"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_centerVertical="true"
-	        android:layout_marginLeft="19dp"
-	        android:layout_toRightOf="@+id/ppvProfilePic"
+	        android:layout_alignLeft="@+id/tvLearningLanguage"
+	        android:layout_alignTop="@+id/ivPlayerPicture"
+	        android:layout_marginLeft="16dp"
 	        android:text="John Doe" />
+
+	    <TextView
+	        android:id="@+id/tvLearningLanguage"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/tvPlayerName"
+	        android:layout_centerHorizontal="true"
+	        android:text="learning spanish" />
+
+	    <ImageView
+	        android:id="@+id/ivLearningLnguageFlag"
+	        android:layout_width="30dp"
+	        android:layout_height="15dp"
+	        android:layout_alignBottom="@+id/tvLearningLanguage"
+	        android:layout_toRightOf="@+id/tvLearningLanguage"
+	        android:src="@drawable/spain1" />
 	    
 	</RelativeLayout>
 	

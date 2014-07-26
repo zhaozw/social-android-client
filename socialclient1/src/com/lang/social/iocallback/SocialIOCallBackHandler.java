@@ -6,6 +6,7 @@ import com.lang.social.competition.HeadToHeadListener;
 import com.lang.social.competition.SocialGameConstants;
 import com.lang.social.competition.SocialLearnCreateMenuListener;
 import com.lang.social.competition.SocialLearnJoinMenuListener;
+import com.lang.social.memorygame.MemoryGameActivity;
 import com.lang.social.memorygame.MemoryGameListener;
 import com.lang.social.room.RoomConstants;
 
@@ -32,6 +33,10 @@ public class SocialIOCallBackHandler {
 		}  else if(eventName.equals(SocialGameConstants.HeadToHeadAnswerResponseKey)){
 			if(mHeadListener != null){
 				mHeadListener.onAnswerResponse(jsonResponse);
+			}
+		}   else if(eventName.equals(MemoryGameActivity.GameRoundResponseKey)){
+			if(memoryGameListener != null){
+				memoryGameListener.OnGameRoundRecieved(jsonResponse);
 			}
 		}  
 	}

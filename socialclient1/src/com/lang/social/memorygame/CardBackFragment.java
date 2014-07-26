@@ -28,7 +28,7 @@ public class CardBackFragment extends Fragment implements OnClickListener {
         
         ivCard = (ImageView) view.findViewById(R.id.cardimage);
         
-        ivCard.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.backcard));
+        ivCard.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.cardbackblue));
         
         ivCard.setOnClickListener(this);      
         

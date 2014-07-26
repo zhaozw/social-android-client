@@ -110,6 +110,7 @@ public class ProfileActivity extends FragmentActivity
 		
 		Bundle bundle = getIntent().getExtras();
 
+		
 		String strCurrentUserPoints = bundle.getString(ProfileConstants.CurrentUserPoints);
 		String strNumOfPointsToNextLevel = bundle.getString(ProfileConstants.PointsToNextLevel);
 		
@@ -118,6 +119,8 @@ public class ProfileActivity extends FragmentActivity
 		int numOfPointsToNextLevel = Integer.parseInt(strNumOfPointsToNextLevel);
 		
 		//setting the user details recieved from intent
+		((TextView)findViewById(R.id.tvProfileFullName)).setText(UserController.getUser().getFullName());
+		
 		((TextView)findViewById(R.id.tvLanguageLevel)).setText(
 				  UserController.getUser().getLearningLanguage() + " "
 				+ UserController.getUser().getCurrentLanguageLevel());

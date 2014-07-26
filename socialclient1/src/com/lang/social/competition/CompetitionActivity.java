@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import com.lang.social.competition.CompetitionGame.PlayerNumber;
 import com.lang.social.controllers.ServerController;
 import com.lang.social.interfaces.GameCloseListener;
 import com.lang.social.iocallback.IOCallBackHandler;
+import com.lang.social.logic.GameType;
 import com.lang.social.logic.User;
 import com.lang.social.logic.UserController;
 import com.lang.social.room.RoomActivity;
@@ -327,16 +330,12 @@ public class CompetitionActivity extends Activity
 		//Handle presses on the action bar items
 		switch (item.getItemId()) {
 	    case android.R.id.home:
-//	    	if(mUserState.equals(CompetitionConstants.IntentRoomStateVALUECreated)){
-//	    		notifyOtherPlayerAboutLeave();
-//	    	}
+	    	handleExitRoomUserRequest();
 	    	finish();
 	    	return true;
         case R.id.action_logout:
         	new UserSessionManager(this).logOutUser();
-//	    	if(mUserState.equals(CompetitionConstants.IntentRoomStateVALUECreated)){
-//	    		notifyOtherPlayerAboutLeave();
-//	    	}
+        	handleExitRoomUserRequest();
             return true;
 		case R.id.action_settings:
 			return true;
@@ -366,17 +365,49 @@ public class CompetitionActivity extends Activity
 		showFragments();
 	}
 
+	///NEW added in 15.6
 	@Override
-	protected void onStop() {
-		super.onStop();
-		//notifyOtherPlayerAboutLeave();
+	public void onBackPressed() {
+		handleExitRoomUserRequest();
 	}
-    
-//	private void notifyOtherPlayerAboutLeave() {
-//		JSONObject jsonToSend = new JSONObject();
-//		JSONUtils.setStringValue(jsonToSend, RoomConstants.GameTypeKEY, CompetitionConstants.HeadToHeadQuizGame);
-//		ServerController.sendJSONMessage(RoomConstants.playerQuitGameNotification, jsonToSend);
-//	}
+
+	
+	private void handleExitRoomUserRequest() {
+		new AlertDialog.Builder(this)
+		    .setTitle("Exit Room")
+		    .setMessage("Are you sure you want to exit game?")
+		    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		        	if(mUserState.equals(SocialGameConstants.IntentRoomStateVALUECreated)){
+		        		closeGameNotification();
+		        	} else {
+		        		notifyHostAboutGuestLeave();
+		        	}
+		        	Log.d("Comp", "finishing...");
+		        	CompetitionActivity.this.finish();
+		        }
+		     })
+		    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		            //do nothing
+		        }
+		     })
+		    .setIcon(android.R.drawable.ic_dialog_alert)
+		    .show();	
+	}
+
+	private void notifyHostAboutGuestLeave() {
+		JSONObject jsonToSend = new JSONObject();
+		JSONUtils.setStringValue(jsonToSend, RoomConstants.GameTypeKEY, GameType.HeadToHeadQuizGame.toString());
+		ServerController.sendJSONMessage(RoomConstants.GuestQuitGameNotification, jsonToSend);
+	}
+
+	private void closeGameNotification() {
+		JSONObject jsonToSend = new JSONObject();
+		JSONUtils.setStringValue(jsonToSend, RoomConstants.GameTypeKEY, GameType.HeadToHeadQuizGame.toString());
+		ServerController.sendJSONMessage(RoomConstants.HostQuitGameNotification, jsonToSend);
+	}
+
 	
 	@Override
 	public void onPlayerLeftGameEvent(JSONObject jsonResponse) {
@@ -388,8 +419,7 @@ public class CompetitionActivity extends Activity
 		finish();
 	}
 
-	
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
