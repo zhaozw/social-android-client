@@ -23,21 +23,21 @@
 				<FrameLayout
 			   	    android:id="@+id/card00"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card01"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card02"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -45,7 +45,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card03" 
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	
@@ -66,21 +66,21 @@
 				<FrameLayout
 			   	    android:id="@+id/card10"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card11"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card12"
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -88,7 +88,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card13" 
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	
@@ -102,27 +102,27 @@
 		        android:layout_marginRight="10dp"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_marginTop="2dp"
+		        android:layout_marginTop="5dp"
 		        android:weightSum="4" >
 		 
 				<FrameLayout
 			   	    android:id="@+id/card20"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card21"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card22"
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -130,7 +130,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card23" 
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	
@@ -150,21 +150,21 @@
 				<FrameLayout
 			   	    android:id="@+id/card30"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 		 
 				<FrameLayout
 			   	    android:id="@+id/card31"
 			   	    android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
 				<FrameLayout
 			   	    android:id="@+id/card32"
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	</FrameLayout>
 			   	
@@ -172,7 +172,7 @@
 				<FrameLayout
 			   	    android:id="@+id/card33" 
 			   	     android:layout_width="0dp"
-			   	    android:layout_height="120dp"
+			   	    android:layout_height="80dp"
 			   	    android:layout_weight="1">
 			   	 </FrameLayout>
 				    			   	

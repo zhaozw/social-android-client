@@ -20,7 +20,7 @@ public class ServerController  {
 
 	 private static final String TAG = "SOCKET"; 
 	 
-	 public static final String LOCAL_SERVER_URL = "http://10.0.0.8:8000";
+	 public static final String LOCAL_SERVER_URL = "http://192.168.0.107:8000";
 	 
 	 private static final String NODEJITSU_SERVER_URL = "http://lang.social.com.jit.su/";
 	 private static final String HEROKU_SERVER_URL = "http://ancient-taiga-2396.herokuapp.com/";
@@ -35,7 +35,7 @@ public class ServerController  {
 		 }
 
 		socket = new SocketIO();
-		socket.connect(LOCAL_SERVER_URL, IOCallBackHandler.getInstance()); 
+		socket.connect(NODEJITSU_SERVER_URL, IOCallBackHandler.getInstance()); 
 	 }
 	 
 
