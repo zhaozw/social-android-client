@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <com.lang.social.chat.Transparent
+        android:id="@+id/popup_window"
+        android:layout_width="238dp"
+        android:layout_height="340dp"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:paddingTop="50dp"
+        android:background="@drawable/chaticon" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="3.19" >
+
+            <EditText
+                android:id="@+id/chatLineET1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignTop="@+id/sendMsgBT"
+                android:layout_toLeftOf="@+id/sendMsgBT"
+                android:background="@drawable/chatbox" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/sendMsgBT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="Sumbit" />
+
+            <ListView
+                android:id="@+id/listViewConversation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/chatLineET1"
+                android:layout_alignParentRight="true" >
+
+            </ListView>
+
+        </RelativeLayout>
+    </com.lang.social.chat.Transparent>
+
+    <Button
+        android:id="@+id/handle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
