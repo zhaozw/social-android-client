@@ -134,28 +134,18 @@ public class MemoryGameActivity extends Activity
 		mPlayer1 = (User)getIntent().getSerializableExtra(SocialGameConstants.IntentPlayer1Key);
 		mPlayer2 = (User)getIntent().getSerializableExtra(SocialGameConstants.IntentPlayer2Key);
 
-		if(mUserState.equals(SocialGameConstants.IntentRoomStateVALUECreated)){
-			if(mPlayer1.isFacebookUser()) {
-				setProfilePicture(playerPic, mPlayer1.getProfileID());
-			}			
-		} else {
-			if(mPlayer2.isFacebookUser()) {
-				setProfilePicture(playerPic, mPlayer2.getProfileID());
-			}
-		}
-
 		tvPlayerName = (TextView) findViewById(R.id.tvPlayerName);
-		tvPlayerName.setText(mPlayer1.getFullName());
-
+		
+		if(UserController.getUser().isFacebookUser()) {
+			setProfilePicture(playerPic, UserController.getUser().getProfileID());
+		}	
+		tvPlayerName.setText(UserController.getUser().getFullName());
 		tvLearningLanguage.setText(UserController.getUser().getLearningLanguageText());
 		ivLearningLnguageFlag.setImageResource(UserController.getFlagImageRes());
 		
 		setFonts();
-		
 		getGameRound();
-		
 		initializeNavigationDrawer();
-		
 		setButtonChatListener();
 	}
 	
@@ -298,30 +288,26 @@ public class MemoryGameActivity extends Activity
 	}
 
 	private void insertBitmap(final Bitmap bitmap, final int cardPairId) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				boolean bitmapInserted = false;
-				Random ran = new Random();
-				do {
-					int x = ran.nextInt(cardFrontFrags.length);
-					int y = ran.nextInt(cardFrontFrags.length);
-					if(!isCardFragmentTaken[x][y]) {
-						cardFrontFrags[x][y] = new CardFrontImageFragment();
-						cardFrontFrags[x][y].SetRow(x);
-						cardFrontFrags[x][y].SetCol(y);
-						Bundle bundle = new Bundle();
-						bundle.putParcelable(MemoryGameImage, bitmap);
-						cardFrontFrags[x][y].setArguments(bundle);
-						
-						cardFrontFrags[x][y].SetCardPairId(cardPairId);
-						
-						isCardFragmentTaken[x][y] = true;
-						bitmapInserted = true;
-					}
-				} while(!bitmapInserted);
+		boolean bitmapInserted = false;
+		Random ran = new Random();
+		do {
+			int x = ran.nextInt(cardFrontFrags.length);
+			int y = ran.nextInt(cardFrontFrags.length);
+			if(!isCardFragmentTaken[x][y]) {
+				cardFrontFrags[x][y] = new CardFrontImageFragment();
+				cardFrontFrags[x][y].SetRow(x);
+				cardFrontFrags[x][y].SetCol(y);
+				Bundle bundle = new Bundle();
+				bundle.putParcelable(MemoryGameImage, bitmap);
+				cardFrontFrags[x][y].setArguments(bundle);
+				
+				cardFrontFrags[x][y].SetCardPairId(cardPairId);
+				
+				isCardFragmentTaken[x][y] = true;
+				bitmapInserted = true;
 			}
-		}).start();
+		} while(!bitmapInserted);
+		Log.d("MemoryGame", "finished inserting 1 bitmap");
 	}
 
 	private void insertWord(final String word, final int cardPairId) {
@@ -344,6 +330,7 @@ public class MemoryGameActivity extends Activity
 				WordInserted = true;
 			}
 		} while(!WordInserted);
+		Log.d("MemoryGame", "finished inserting 1 word");
 	}
 
 	private Bitmap parseImage(JSONObject json) {
