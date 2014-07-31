@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_bg_hover" >
+
+    <Button
+        android:id="@+id/btnOption1"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="150dp"
+        android:layout_marginLeft="16dp" />
+
+    <Button
+        android:id="@+id/btnOption2"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_alignBaseline="@+id/btnOption1"
+        android:layout_alignBottom="@+id/btnOption1"
+        android:layout_toRightOf="@+id/btnOption1" />
+
+    <Button
+        android:id="@+id/btnOption3"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/btnOption2"
+        android:layout_toLeftOf="@+id/btnOption2" />
+
+    <Button
+        android:id="@+id/btnOption4"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/btnOption2"
+        android:layout_toRightOf="@+id/btnOption1" />
+
+    <Button
+        android:id="@+id/btnOptionPass"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/btnOption3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="Pass" />
+
+    <ImageView
+        android:id="@+id/ivConnectedStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnBack"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:src="@drawable/ic_action_gamepad" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="47dp"
+        android:text="Back" />
+
+</RelativeLayout>

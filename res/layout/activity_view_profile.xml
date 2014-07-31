@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.lang.social"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/White"
+    android:orientation="horizontal" >
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/profilepicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="14dp"
+         android:src="@drawable/person"
+        app:border="true"
+        app:border_color="@color/GrayLight"
+        app:border_width="4dp"
+        app:shadow="true" />
+
+    <TextView
+        android:id="@+id/tvProfileFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginLeft="46dp"
+        android:layout_toRightOf="@+id/profilepicture"
+        android:text="Daniel Rahamim" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/sociallangfooterbackwards"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvProfileLearningLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvProfileFullName"
+        android:layout_below="@+id/tvProfileFullName"
+        android:text="learning spanish" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_above="@+id/tvProfileLearningLanguage"
+        android:layout_alignTop="@+id/tvProfileFullName"
+        android:layout_toLeftOf="@+id/tvProfileLearningLanguage"
+        android:src="@drawable/ic_action_next_item" />
+
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/tvProfileLearningLanguage"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_alignTop="@+id/tvProfileLearningLanguage"
+        android:src="@drawable/ic_action_next_item" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutCenter"
+        android:layout_width="50dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:background="@drawable/profilepagebg2" >
+
+        <TextView
+            android:id="@+id/tvProfileGivePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvProfilePoke"
+            android:layout_alignBottom="@+id/tvProfilePoke"
+            android:layout_alignLeft="@+id/ivProfileStatus"
+            android:text="Give Points" />
+
+        <ImageView
+            android:id="@+id/ivProfileStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/ivProfileFriends"
+            android:layout_marginRight="26dp"
+            android:src="@drawable/iconsettingspurple" />
+
+        <TextView
+            android:id="@+id/tvProfileActionHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:text="Actions" />
+
+        <ImageView
+            android:id="@+id/ivProfileMessages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvProfileActionHeader"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="46dp"
+            android:src="@drawable/iconmessages" />
+
+        <TextView
+            android:id="@+id/tvProfileMessages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ivProfileFriends"
+            android:layout_alignLeft="@+id/ivProfileMessages"
+            android:text="Send Message" />
+
+        <ImageView
+            android:id="@+id/ivProfileFriends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivProfileMessages"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/iconfriends" />
+
+        <TextView
+            android:id="@+id/tvProfilePoke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ivProfileFriends"
+            android:layout_centerHorizontal="true"
+            android:text="Poke" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/profilepicture"
+        android:layout_marginTop="20dp"
+        android:background="@color/GrayLight" >
+
+        <TextView
+            android:id="@+id/tvProfileBronze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ivprofilebronzemedal"
+            android:layout_marginLeft="16dp"
+            android:text="Bronze Medal" />
+
+        <ImageView
+            android:id="@+id/ivprofilebronzemedal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvProfileBronze"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/levelnewbieicon" />
+
+        <ImageView
+            android:id="@+id/ivprofilesilvermedal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvProfileBronze"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/levelnewbieicon" />
+
+        <TextView
+            android:id="@+id/tvprofileviewsilvermedal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivprofilesilvermedal"
+            android:layout_centerHorizontal="true"
+            android:text="Silver Medal" />
+
+        <TextView
+            android:id="@+id/tvprofileviewgoldmedal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ivprofileviewgoldmedal"
+            android:layout_marginRight="15dp"
+            android:text="Gold Medal" />
+
+        <ImageView
+            android:id="@+id/ivprofileviewgoldmedal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvprofileviewgoldmedal"
+            android:layout_alignTop="@+id/ivprofilesilvermedal"
+            android:layout_marginLeft="14dp"
+            android:src="@drawable/levelnewbieicon" />
+
+        <TextView
+            android:id="@+id/tvProfileDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvprofileviewsilvermedal"
+            android:layout_alignParentTop="true"
+            android:text="Achievments" />
+    </RelativeLayout>
+
+</RelativeLayout>

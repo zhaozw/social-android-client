@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SociaLang</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Sign_In">Sign In</string>
+    <string name="Welcome_To_SociaLang">Welcome To SociaLang</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Sign_Up">Sign Up</string>
+    <string name="Sign_Up_To_SociaLang">Sign Up To SociaLang</string>
+    <string name="New_User_Name">User Name</string>
+    <string name="New_Email">Email</string>
+    <string name="New_Password">Password</string>
+    <string name="Continue_Registration_1">Register</string>
+    <string name="logo">social lang logo</string>
+    <string name="profileIcon">My Profile Icon</string>
+    <string name="title_activity_find_game">Find A Game</string>
+    <string name="replace_profile_pic">Change Profile Picture</string>
+    <string name="APP_ID">183230238553561</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="action_profile">My Profile</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="new_game">New Game</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_create_new_game">CreateNewGameActivity</string>
+    <string name="title_activity_game_lobby">GameLobbyActivity</string>
+    <string name="actions_logout">Log Out</string>
+    <string name="title_activity_my_languages">MyLanguagesActivity</string>
+    <string name="difficulty_alert_dialog_fragment_title">Choose A Difficulty</string>
+    <string name="usernameTakenMessage">Username is already in use!</string>
+    <string name="action_search">Search</string>
+    <string name="share">Share</string>
+    <string name="gallows">The Gallows</string>
+    <string name="head">The Head</string>
+    <string name="body">The Body</string>
+    <string name="arm">An Arm</string>
+    <string name="leg">A Leg</string>
+    <string name="community_status"><u>Your Status:</u></string>
+    <string name="pic_game_question">Select The : &quot;Question&quot;</string>
+    <string name="elv_undo">Undo</string>
+    <string name="elv_undo_all">Undo All</string>
+    <string name="elv_item_deleted">Item deleted</string>
+    <string name="elv_n_items_deleted">%1$s items deleted</string>
+
+    <string-array name="drawer_items_array">
+        <item>My Profile</item>
+        <item>My Languages</item>
+    </string-array>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>Home</item>
+        <item>Find People</item>
+        <item>Photos</item>
+        <item>Communities</item>
+        <item>Pages</item>
+        <item>What\'s Hot</item>
+    </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_people</item>
+        <item>@drawable/ic_photos</item>
+        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_pages</item>
+        <item>@drawable/ic_whats_hot</item>
+    </array>
+
+    <string-array name="languages_array">
+        <item>Spanish</item>
+        <item>Hebrew</item>
+        <item>German</item>
+        <item>French</item>
+        <item>Dutch</item>
+        <item>Italian</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_nav_drawer_base">NavDrawerBaseActivity</string>
+    <string name="title_activity_room">RoomActivity</string>
+    <string name="title_activity_self_learn_menu">SelfLearnActivity</string>
+    <string name="title_activity_social_learn">SocialLearnActivity</string>
+    <string name="title_activity_student_teacher">StudentTeacherActivity</string>
+    <string name="title_activity_student_teacher_game_study">StudentTeacherGameStudyActivity</string>
+    <string name="title_activity_student_teacher_game">StudentTeacherGameActivity</string>
+    <string name="title_activity_picture_quiz_game">PictureQuizGame</string>
+    <string name="title_activity_photo_guess">PhotoGuessActivity</string>
+    <string name="title_activity_screen_slide">ScreenSlideActivity</string>
+    <string name="title_activity_memory_game">Memory Game</string>
+
+</resources>

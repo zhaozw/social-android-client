@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+     
+     <RelativeLayout
+         android:id="@+id/relativeLayoutCenterLeft"
+         android:layout_width="90dp"
+         android:layout_height="120dp"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/messageHeader"
+         android:background="@drawable/profilepagebg1" >
+
+            <ImageView
+                android:id="@+id/ivFriendLearningLanguageFlag"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@+id/friendLearningLanguage"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/friendLearningLanguage"
+                android:src="@drawable/spain1" />
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/profilePictureCircular"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="22dp" />
+
+            <TextView
+                android:id="@+id/friendLearningLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="40dp"
+                android:layout_toLeftOf="@+id/tvFriendName"
+                android:text="learning spanish" />
+
+            <TextView
+                android:id="@+id/tvFriendNumOfPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ivFriendLearningLanguageFlag"
+                android:layout_toRightOf="@+id/profilePictureCircular"
+                android:text="points : 2140" />
+
+            <TextView
+                android:id="@+id/tvFriendLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivFriendLearningLanguageFlag"
+                android:layout_toRightOf="@+id/profilePictureCircular"
+                android:text="level : beginner" />
+
+            <TextView
+                android:id="@+id/tvFriendName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profilePictureCircular"
+                android:layout_centerHorizontal="true"
+                android:text="friend name" />
+
+         </RelativeLayout>
+
+     <TextView
+         android:id="@+id/messageHeader"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:text="Friend's Profile" />
+  
+</RelativeLayout>

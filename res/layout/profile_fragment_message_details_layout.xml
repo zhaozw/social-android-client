@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+     
+     <RelativeLayout
+         android:id="@+id/relativeLayoutCenterLeft"
+         android:layout_width="90dp"
+         android:layout_height="120dp"
+         android:layout_above="@+id/relativeLayoutBottom"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/messageHeader"
+         android:background="@drawable/profilepagebg1" >
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/profilePictureCircular"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_above="@+id/tvFriendName"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tvMessageBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="the message content..." />
+
+            <TextView
+                android:id="@+id/tvMessageSentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvMessageBody"
+                android:layout_centerHorizontal="true"
+                android:text="2014-7-1" />
+
+            <TextView
+                android:id="@+id/tvFriendName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvMessageSentDate"
+                android:layout_centerHorizontal="true"
+                android:text="Sender name" />
+
+         </RelativeLayout>
+     
+     <RelativeLayout
+         android:id="@+id/relativeLayoutBottom"
+         android:layout_width="match_parent"
+         android:layout_height="60dp"
+         android:layout_alignParentBottom="true"
+         android:background="@drawable/profilepagebg2" >
+
+         <EditText
+             android:id="@+id/etSendBackAMessage"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true"
+             android:layout_alignParentLeft="true"
+             android:layout_marginBottom="16dp"
+             android:layout_toLeftOf="@+id/btnSubmitSendMessage"
+             android:ems="10"
+             android:hint="reply..."
+             android:inputType="textMultiLine" />
+
+         <Button
+             android:id="@+id/btnSubmitSendMessage"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignBottom="@+id/etSendBackAMessage"
+             android:layout_alignParentRight="true"
+             android:layout_alignTop="@+id/etSendBackAMessage"
+             android:text="Send"
+             android:textSize="18sp" />
+
+     </RelativeLayout>
+
+     <TextView
+         android:id="@+id/messageHeader"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:text="Message" />
+  
+</RelativeLayout>
