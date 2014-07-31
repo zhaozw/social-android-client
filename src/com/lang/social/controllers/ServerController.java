@@ -19,7 +19,7 @@ public class ServerController  {
 
 	 private static final String TAG = "SOCKET"; 
 	 
-	 public static final String  LOCAL_SERVER_URL = "http://192.168.198.22:7979";
+	 public static final String  LOCAL_SERVER_URL = "http://10.0.0.7:7979";
 	 private static final String NODEJITSU_SERVER_URL = "http://lang.social.com.jit.su/";
 	 private static final String HEROKU_SERVER_URL = "http://radiant-reef-4113.herokuapp.com/";
 	 
@@ -32,13 +32,9 @@ public class ServerController  {
 		 if(socket != null){
 			 socket.disconnect();
 		 }
-		 
 		 socket = new SocketIO();
-	
 		 //productionConnect(context);
-		 
 		 developmentConnect(context);
-
 	 }
 	 
 

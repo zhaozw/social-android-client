@@ -22,6 +22,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -73,7 +74,7 @@ public class MemoryGameActivity extends Activity
 	private TextView tvPlayerName;
 	private ImageView ivLearningLnguageFlag;
 	
-	Fragment[][] cardBackFrags = new Fragment[4][4];
+	CardBackFragment[][] cardBackFrags = new CardBackFragment[4][4];
 	CardFrontFragment[][] cardFrontFrags = new CardFrontFragment[4][4];
 	int[][] cardsContainersFragsIds = new int[4][4];
 	boolean[][] isCardFragmentTaken = new boolean[4][4];
@@ -108,17 +109,15 @@ public class MemoryGameActivity extends Activity
 	
 	private Point pointPressedFirst;
 	private Point pointPressedSecond;
-	private NumOfCardsShown currentNumOfCardsShown;
+	private NumOfCardsShown currentNumOfCardsShown = NumOfCardsShown.Zero;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.memory_game_activity);
 
-        if (savedInstanceState == null) {
-        	initAllCardContainersId();
-        	initAllCardFragment();
-        }
+    	initAllCardContainersId();
+    	initAllCardFragment();
         
         createProgressDialog();
         
@@ -144,11 +143,12 @@ public class MemoryGameActivity extends Activity
 		ivLearningLnguageFlag.setImageResource(UserController.getFlagImageRes());
 		
 		setFonts();
-		getGameRound();
+		
 		initializeNavigationDrawer();
 		setButtonChatListener();
 	}
 	
+
 	private void initializeNavigationDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_chat);
         mDrawerList = (ListView) findViewById(R.id.left_drawer_chat_listView);
@@ -173,6 +173,15 @@ public class MemoryGameActivity extends Activity
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 		
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		IOCallBackHandler.getInstance().setMemoryGameListener(this);
+		IOCallBackHandler.getInstance().setChatListener(this);
+		IOCallBackHandler.getInstance().setGameCloseListener(this);
+		getGameRound();
 	}
 
 
@@ -254,38 +263,55 @@ public class MemoryGameActivity extends Activity
 	}
 
 	private void insertWordAndBitmapToFragments(final String word, final Bitmap bitmap, final int cardPairId) {
-		Thread insertWordThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				insertWord(word, cardPairId);	
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						progressDialog.dismiss();
-					}
-				});
-			}
-		});
-		
-		insertWordThread.start();
-		
-		
-		Thread insertBitmapThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				insertBitmap(bitmap, cardPairId);
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						progressDialog.dismiss();
-					}
-				});
-			}
-		});
-		
-		insertWordThread.start();
-		insertBitmapThread.start();
+		new InsertBitmapTask(cardPairId).execute(bitmap);
+		new InsertWordTask(cardPairId).execute(word);
 	}
+	
+	 private class InsertBitmapTask extends AsyncTask<Bitmap, Void, Void> {
+		private int cardPairId;
+		
+		public InsertBitmapTask(int cardPairId) {
+			this.cardPairId = cardPairId;
+		}
+
+		@Override
+		protected Void doInBackground(Bitmap... bitmaps) {
+			Log.d("MemoryGame", "calling insertBitmap from InsertBitmapTask");
+			insertBitmap(bitmaps[0], cardPairId);
+			return null;
+		}
+		
+		@Override
+	     protected void onPostExecute(Void result) {
+			Log.d("MemoryGame", "finished inserting bitmap into fragment : " + cardPairId);
+			if(progressDialog.isShowing()){
+				 progressDialog.dismiss();
+			}
+	    }
+	 }
+	 
+	 private class InsertWordTask extends AsyncTask<String, Void, Void> {
+			private int cardPairId;
+			
+			public InsertWordTask(int cardPairId) {
+				this.cardPairId = cardPairId;
+			}
+			
+			@Override
+			protected Void doInBackground(String... words) {
+				Log.d("MemoryGame", "calling insertWord from InsertWordTask into fragment : " + cardPairId);
+				insertWord(words[0], cardPairId);
+				return null;
+			}
+			
+			@Override
+		     protected void onPostExecute(Void result) {
+				Log.d("MemoryGame", "finished inserting word into fragment : " + cardPairId);
+				if(progressDialog.isShowing()){
+					 progressDialog.dismiss();
+				}
+		    }
+	 }
 
 	private void insertBitmap(final Bitmap bitmap, final int cardPairId) {
 		boolean bitmapInserted = false;
@@ -300,14 +326,14 @@ public class MemoryGameActivity extends Activity
 				Bundle bundle = new Bundle();
 				bundle.putParcelable(MemoryGameImage, bitmap);
 				cardFrontFrags[x][y].setArguments(bundle);
-				
 				cardFrontFrags[x][y].SetCardPairId(cardPairId);
 				
+				Log.d("MemoryGame", "taking card fragment for bitmap content!");
+
 				isCardFragmentTaken[x][y] = true;
 				bitmapInserted = true;
 			}
 		} while(!bitmapInserted);
-		Log.d("MemoryGame", "finished inserting 1 bitmap");
 	}
 
 	private void insertWord(final String word, final int cardPairId) {
@@ -323,14 +349,14 @@ public class MemoryGameActivity extends Activity
 				Bundle bundle = new Bundle();
 				bundle.putString(MemoryGameWord, word);
 				cardFrontFrags[x][y].setArguments(bundle);
-				
 				cardFrontFrags[x][y].SetCardPairId(cardPairId);
+				
+				Log.d("MemoryGame", "taking card fragment for word content!");
 				
 				isCardFragmentTaken[x][y] = true;
 				WordInserted = true;
 			}
 		} while(!WordInserted);
-		Log.d("MemoryGame", "finished inserting 1 word");
 	}
 
 	private Bitmap parseImage(JSONObject json) {
@@ -365,6 +391,10 @@ public class MemoryGameActivity extends Activity
 
 
 	private void initAllCardContainersId() {
+		for (int i = 0; i < cardsContainersFragsIds.length; i++) {
+			cardsContainersFragsIds[i] = new int[4];
+		}
+
 		cardsContainersFragsIds[0][0] = R.id.card00;
 		cardsContainersFragsIds[0][1] = R.id.card01;
 		cardsContainersFragsIds[0][2] = R.id.card02;
@@ -383,44 +413,18 @@ public class MemoryGameActivity extends Activity
 		cardsContainersFragsIds[3][3] = R.id.card33;
 
 	}
-	
-	private void flipCardToFront(int i, int j) {
-		if(!isCardFragmentTaken[i][j]) {
-			return;
-		}
-	    getFragmentManager()
-	            .beginTransaction()
-	            .setCustomAnimations(
-	                    R.anim.card_flip_right_in, R.anim.card_flip_right_out,
-	                    R.anim.card_flip_left_in, R.anim.card_flip_left_out)
-	            .replace(cardsContainersFragsIds[i][j], cardFrontFrags[i][j])
-	            .commit();
-	}
-	
-	private void flipCardToBack(int i, int j) {
-		if(!isCardFragmentTaken[i][j]) {
-			return;
-		}
-	    getFragmentManager()
-	            .beginTransaction()
-	            .setCustomAnimations(
-	                    R.anim.card_flip_right_in, R.anim.card_flip_right_out,
-	                    R.anim.card_flip_left_in, R.anim.card_flip_left_out)
-	            .replace(cardsContainersFragsIds[i][j], cardBackFrags[i][j])
-	            .commit();
-	}
 
 	private void initAllCardFragment() {
 		for (int i = 0; i < cardBackFrags.length; i++) {
-			cardBackFrags[i] = new Fragment[4];
+			cardBackFrags[i] = new CardBackFragment[4];
 			cardFrontFrags[i] = new CardFrontFragment[4];
 		}
 
 		for (int i = 0; i < cardBackFrags.length; i++) {
 			for (int j = 0; j < cardBackFrags[i].length; j++) {
 				cardBackFrags[i][j] = new CardBackFragment();
-				((CardBackFragment)cardBackFrags[i][j]).SetRow(i);
-				((CardBackFragment)cardBackFrags[i][j]).SetCol(j);
+				cardBackFrags[i][j].SetRow(i);
+				cardBackFrags[i][j].SetCol(j);
 			}
 		}
 
@@ -437,31 +441,74 @@ public class MemoryGameActivity extends Activity
 	@Override
 	public void OnCardClick(final int row, final int col) {
 		Log.d("MemoryGame", "row: " + row + " col: " + col);
-	    if(currentNumOfCardsShown == NumOfCardsShown.Zero){
+		//if its the first press
+	    if(currentNumOfCardsShown == NumOfCardsShown.Zero)
+	    {
 	    	pointPressedFirst = new Point(row, col);
 	    	currentNumOfCardsShown = NumOfCardsShown.One;
 	    	flipCardToFront(row, col);
-	    } else if(currentNumOfCardsShown == NumOfCardsShown.One){
+	    } 
+	  //if its the second press
+	    else if(currentNumOfCardsShown == NumOfCardsShown.One)
+	    {
 	    	pointPressedSecond = new Point(row, col);
 	    	currentNumOfCardsShown = NumOfCardsShown.Two;
 	    	flipCardToFront(row, col);
-	    	
-	    	if(CardsMatch()){
+	    	//if correct
+	    	if(CardsMatch())
+	    	{
 	    		MyToaster.showToast(MemoryGameActivity.this, "Match!", Toast.LENGTH_SHORT);
-	    	} else{
+	    	} 
+	    	//if wrong
+	    	else
+	    	{
 	    		MyToaster.showToast(MemoryGameActivity.this, "Dont Match!", Toast.LENGTH_SHORT);
-	    		new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						flipCardToBack(row, col);
-					}
-				}, Toast.LENGTH_SHORT);
+	    		currentNumOfCardsShown = NumOfCardsShown.Zero;
+	    		turnCardsBackInDelay();
 	    	}
-	    	
-	    } else {
-	    	///
-	    }
+	    } 
 	}
+	
+	
+	private void turnCardsBackInDelay() {
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				flipCardsBack();
+			}
+		}, Toast.LENGTH_SHORT);
+	}
+
+
+	private void flipCardToFront(int i, int j) {
+		if(!isCardFragmentTaken[i][j]) {
+			return;
+		}
+	    getFragmentManager()
+	            .beginTransaction()
+	            .setCustomAnimations(
+	                    R.anim.card_flip_right_in, R.anim.card_flip_right_out,
+	                    R.anim.card_flip_left_in, R.anim.card_flip_left_out)
+	            .replace(cardsContainersFragsIds[i][j], cardFrontFrags[i][j])
+	            .commit();
+	}
+	
+	private void flipCardsBack() {
+		flipCardBack(pointPressedFirst);
+		flipCardBack(pointPressedSecond);
+	}
+
+
+	private void flipCardBack(Point p) {
+	    getFragmentManager()
+        .beginTransaction()
+        .setCustomAnimations(
+                R.anim.card_flip_right_in, R.anim.card_flip_right_out,
+                R.anim.card_flip_left_in, R.anim.card_flip_left_out)
+        .replace(cardsContainersFragsIds[p.getX()][p.getY()], cardBackFrags[p.getX()][p.getY()])
+        .commit();
+	}
+
 
 	private boolean CardsMatch() {
 		//if user pressed the same point twice!
@@ -491,15 +538,7 @@ public class MemoryGameActivity extends Activity
 		ServerController.sendJSONMessage(RoomConstants.HostQuitGameNotification, jsonToSend);
 	}
 	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		IOCallBackHandler.getInstance().setMemoryGameListener(this);
-		IOCallBackHandler.getInstance().setChatListener(this);
-		IOCallBackHandler.getInstance().setGameCloseListener(this);
-	}
 
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // The action bar home/up action should open or close the drawer.
